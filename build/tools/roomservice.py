@@ -60,7 +60,7 @@ if not depsonly:
         print("Failed to parse return data from GitHub")
         sys.exit(1)
     for res in result.findall('.//project'):
-        repositories.append(res.attrib['name'][10:])
+        repositories.append(res.attrib['name'].split('/')[1])
 
 local_manifests = r'.repo/local_manifests'
 if not os.path.exists(local_manifests): os.makedirs(local_manifests)
@@ -172,13 +172,13 @@ def add_to_manifest(repositories):
         repo_revision = repository['branch']
         print('Checking if %s is fetched from %s' % (repo_target, repo_name))
         if is_in_manifest(repo_target):
-            print('LineageOS/%s already fetched to %s' % (repo_name, repo_target))
+            print('Linux-On-LineageOS/%s already fetched to %s' % (repo_name, repo_target))
             continue
 
         project = ElementTree.Element("project", attrib = {
             "path": repo_target,
             "remote": "github",
-            "name": "LineageOS/%s" % repo_name,
+            "name": "Linux-On-LineageOS/%s" % repo_name,
             "revision": repo_revision })
         if repo_remote := repository.get("remote", None):
             # aosp- remotes are only used for kernel prebuilts, thus they
