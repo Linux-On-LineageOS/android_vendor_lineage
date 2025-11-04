@@ -179,8 +179,7 @@ def add_to_manifest(repositories):
             "path": repo_target,
             "remote": "github",
             "name": "Linux-On-LineageOS/%s" % repo_name,
-            "revision": repo_revision,
-            "sync-s": "true" })
+            "revision": repo_revision })
         if repo_remote := repository.get("remote", None):
             # aosp- remotes are only used for kernel prebuilts, thus they
             # don't let you customize clone-depth/revision.
